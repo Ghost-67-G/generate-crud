@@ -1,0 +1,17 @@
+{
+  "name": "express-crud-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node generate-crud.js"
+  },
+  "bin": {
+    "generate-crud": "./generate-crud.js"
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.2.0",
+    "mongoose": "^8.4.0"
+  }
+}
