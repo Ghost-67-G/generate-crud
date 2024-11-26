@@ -31,20 +31,20 @@ const generateRouteTemplate = (name) => `
 const express = require('express');
 const router = express.Router();
 const validate = require('../../middlewares/validate');
-const { validateAccessToken } = require('../../middlewares/auth0.middleware');
+const auth = require('../../middlewares/auth');
 const ${name.toLowerCase()}Controller = require('./controller');
 const ${name.toLowerCase()}Validation = require('./validation');
 
 router
   .route('/')
-  .post(validateAccessToken, validate(${name.toLowerCase()}Validation.create${name}), ${name.toLowerCase()}Controller.create)
-  .get(validateAccessToken, validate(${name.toLowerCase()}Validation.get${name}s), ${name.toLowerCase()}Controller.getAll);
+  .post(auth(), validate(${name.toLowerCase()}Validation.create${name}), ${name.toLowerCase()}Controller.create)
+  .get(auth(), validate(${name.toLowerCase()}Validation.get${name}s), ${name.toLowerCase()}Controller.getAll);
 
 router
   .route('/:id')
-  .get(validateAccessToken, validate(${name.toLowerCase()}Validation.get${name}), ${name.toLowerCase()}Controller.getOne)
-  .patch(validateAccessToken, validate(${name.toLowerCase()}Validation.update${name}), ${name.toLowerCase()}Controller.update)
-  .delete(validateAccessToken, validate(${name.toLowerCase()}Validation.delete${name}), ${name.toLowerCase()}Controller.remove);
+  .get(auth(), validate(${name.toLowerCase()}Validation.get${name}), ${name.toLowerCase()}Controller.getOne)
+  .patch(auth(), validate(${name.toLowerCase()}Validation.update${name}), ${name.toLowerCase()}Controller.update)
+  .delete(auth(), validate(${name.toLowerCase()}Validation.delete${name}), ${name.toLowerCase()}Controller.remove);
 
 module.exports = router;
 `;
